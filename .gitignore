@@ -1,0 +1,7 @@
+# Enviroments
+env/
+
+# Reports
+results/*.json
+results/*.txt
+results/*.csv
