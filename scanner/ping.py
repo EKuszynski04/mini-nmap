@@ -1,6 +1,4 @@
 import socket;
 
-help(socket)
-
-def ping(ip, duration, timeout, amount):
+def ping(ip: str, duration: float, timeout: float, amount: int):
     quit

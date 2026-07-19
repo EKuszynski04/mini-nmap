@@ -5,6 +5,6 @@ from models import PortState
 class ScanResult:
     port: int
     state: PortState
-    service: str = ""
-    error_msg: str = ""
+    service: str = ''
+    error_msg: str = ''
     
