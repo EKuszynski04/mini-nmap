@@ -1,7 +1,8 @@
 # Constant String Error Messages
 ERROR_PORT_INVALID:str = "Invalid port number."
 ERROR_IP_INVALID:str = "Invalid IP address."
-ERROR_HOST_UNREACHABLE = "Host is unreachable."
+ERROR_HOST_UNREACHABLE:str = "Host is unreachable."
+ERROR_SCANTYPE:str =  "Invalid scan type."
 
 # Constant String Warning Messages
 WARNING_USER_MSG:str = "Warning: Only scan systems where you have explict permission."
@@ -22,6 +23,10 @@ MAX_PORT_RANGE:int =  5000
 COMMON_PORT_LIMIT: int = 1024
 
 # Constant Prompt Strings
-
 PROMPT_TARGET_IP:str = "Target IP address: "
-PROMPT_TARGET_PORT:str = "Target Port: "
+PROMPT_TARGET_MIN_PORT:str = "Target Port: "
+PROMPT_TARGET_MAX_PORT:str = "Target Port: "
+PROMPT_SCAN_TYPE:str = "Scan type - (T)CP or (U)DP: "
+
+# Constant Valid Scan Types Collection
+VALID_SCAN_TYPES = {"T", "TCP", "U", "UDP"}
