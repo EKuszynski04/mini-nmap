@@ -1,7 +1,7 @@
 # Validators used to vaidate various user inputs and provide feedback
 
-from constants import MAX_PORT_NUMBER,MIN_PORT_NUMBER,MAX_PORT_RANGE,ERROR_PORT_INVALID,WARNING_LARGE_PORT,VALID_SCAN_TYPES,ERROR_SCANTYPE,ERROR_IP_INVALID,WARNING_LARGE_TIMEOUT,COMMON_TIMEOUT_LIMIT,MAX_TIMEOUT_LIMIT,MIN_TIMEOUT_LIMIT,WARNING_LARGE_TIMEOUT,ERROR_MIN_TIMEOUT,ERROR_MAX_TIMEOUT
-from models import ValidationResult
+from constants import MAX_PORT_NUMBER,MIN_PORT_NUMBER,MAX_PORT_RANGE,ERROR_PORT_INVALID,WARNING_LARGE_PORT,ERROR_SCANTYPE,ERROR_IP_INVALID,WARNING_LARGE_TIMEOUT,COMMON_TIMEOUT_LIMIT,MAX_TIMEOUT_LIMIT,MIN_TIMEOUT_LIMIT,WARNING_LARGE_TIMEOUT,ERROR_MIN_TIMEOUT,ERROR_MAX_TIMEOUT
+from models import ValidationResult,ScanType
 import ipaddress
 
 # Functions used to validate the user inputted ports
@@ -16,10 +16,9 @@ def validate_ports(min_port:int,max_port:int):
         return ValidationResult(valid=True,warning=WARNING_LARGE_PORT)
     return ValidationResult(valid=True)
 # Functions used to validate the user inputted scan type
-def validate_scan_type(scan_input:str):
-    scan_input = scan_input.upper()
-    if scan_input in VALID_SCAN_TYPES:
-        return ValidationResult(valid=True,warning=WARNING_LARGE_PORT)
+def validate_scan_type(scan_input:ScanType):
+    if isinstance (scan_input,ScanType):
+        return ValidationResult(valid=True)
     return ValidationResult(valid=False, reason=ERROR_SCANTYPE)
 
 # Function used to validate IP addresses
@@ -32,9 +31,10 @@ def validate_ip_address(ip_addr:str):
 
 # Function to validate timeout times
 def validate_timeout(timeout:float):
+    if timeout < MIN_TIMEOUT_LIMIT:
+            return ValidationResult(valid=False,reason=ERROR_MIN_TIMEOUT)
+    if timeout > MAX_TIMEOUT_LIMIT:
+        return ValidationResult(valid=False,reason=ERROR_MAX_TIMEOUT)
     if timeout > COMMON_TIMEOUT_LIMIT:
         return ValidationResult(valid=True,warning=WARNING_LARGE_TIMEOUT)
-    elif timeout > MAX_TIMEOUT_LIMIT:
-        return ValidationResult(valid=False,reason=ERROR_MAX_TIMEOUT)
-    elif timeout < MIN_TIMEOUT_LIMIT:
-            return ValidationResult(valid=False,reason=ERROR_MIN_TIMEOUT)
+    return ValidationResult(valid=True)

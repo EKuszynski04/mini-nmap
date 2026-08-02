@@ -1,15 +1,29 @@
 # Parses.py responsible for parsing different inputs to match 
-# different functions datatypes after validations
+# different functions datatypes for validations
 
+from utils.mappings import VALID_SCAN_TYPES_MAP
+from utils.constants import ERROR_SCANTYPE
+import ipaddress
 
-# Function that returns a list of ports that can be used for a scan
-def parse_ports(min_port:int,max_port:int):
-    return list(range(min_port, max_port + 1))
+# list(range(port_min, port_max + 1))
 
-# Function used to check reuturn a scan type based on user input
+# Function that returns a enum of the user specified scan type
 def parse_scan_type(scan_type:str):
-    if scan_type == 'T' or scan_type == 'TCP':
-        scan = 'TCP'
-    else:
-        scan = 'UDP'
-    return scan
+    scan_input  = scan_type.strip().upper()
+    try:
+        return VALID_SCAN_TYPES_MAP[scan_input]
+    except KeyError:
+        raise ValueError(ERROR_SCANTYPE) from None
+
+
+# Function that returns a list of ports after parsing that can be used for a scan
+def parse_ports(min_port,max_port):
+    return int(min_port),int(max_port)
+
+# Function that returns a float timeout value
+def parse_timeout(timeout):
+    return float(timeout)
+    
+# Function that returns an ip address 
+def parse_ip_address(ip_address):
+    return ipaddress.ip_address(ip_address)

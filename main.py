@@ -1,4 +1,10 @@
 import socket;
-from cli import display_scan_config
+from controller.controller import ScanController
 
-display_scan_config();
+def main():
+    controller = ScanController()
+    controller.run()
+
+if __name__ == "__main__":
+    main()
+    
