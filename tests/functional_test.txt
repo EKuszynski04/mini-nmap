@@ -1,0 +1,98 @@
+15/08/26
+
+# Testing Setup
+
+| Kali Linux | Scanner | 192.168.100.10 |
+| Ubuntu Server | Target | 192.168.100.20 |
+
+Test 1: A test designed to compare the results of mininmap to nmap on specific ports.
+
+nmap:
+Starting Nmap 7.99 ( https://nmap.org ) at 2026-08-15 23:15 +0100
+Nmap scan report for 192.168.100.20
+Host is up (0.00064s latency).
+
+PORT     STATE  SERVICE
+22/tcp   open   ssh
+80/tcp   open   http
+443/tcp  closed https
+445/tcp  open   microsoft-ds
+3306/tcp closed mysql
+MAC Address: 08:00:27:05:9D:9A (Oracle VirtualBox virtual NIC)
+
+Nmap done: 1 IP address (1 host up) scanned in 2.08 seconds
+
+mini-nmap:
+Port:  22 State:  open
+Port:  80 State:  open
+Port:  443 State:  closed
+Error Message:  Connection refused
+Port:  445 State:  open
+Port:  3306 State:  closed
+Error Message:  Connection refused
+
+Test 2: Closing port 80.
+
+nmap:
+Starting Nmap 7.99 ( https://nmap.org ) at 2026-08-15 23:22 +0100
+Nmap scan report for 192.168.100.20
+Host is up (0.00071s latency).
+
+PORT   STATE  SERVICE
+80/tcp closed http
+MAC Address: 08:00:27:05:9D:9A (Oracle VirtualBox virtual NIC)
+
+mini-nmap:
+Port:  80 State:  closed
+Error Message:  Connection refused
+
+
+Test 3: Firewall filtering on port 9999.
+
+nmap:
+Starting Nmap 7.99 ( https://nmap.org ) at 2026-08-15 23:34 +0100
+Nmap scan report for 192.168.100.20
+Host is up (0.00048s latency).
+
+PORT     STATE    SERVICE
+9999/tcp filtered abyss
+MAC Address: 08:00:27:05:9D:9A (Oracle VirtualBox virtual NIC)
+
+Nmap done: 1 IP address (1 host up) scanned in 2.31 seconds
+
+mini-nmap
+Port:  9999 State:  error
+Error Message:  Resource temporarily unavailable
+
+Test 4: UDP test on port 53
+
+nmap:
+Starting Nmap 7.99 ( https://nmap.org ) at 2026-08-15 23:38 +0100
+Nmap scan report for 192.168.100.20
+Host is up (0.00054s latency).
+
+PORT   STATE         SERVICE
+53/udp open|filtered domain
+MAC Address: 08:00:27:05:9D:9A (Oracle VirtualBox virtual NIC)
+
+Nmap done: 1 IP address (1 host up) scanned in 2.40 seconds
+
+mini-nmap:
+Port:  53 State:  open
+
+Test 5: UDP on non udp service port 22222
+
+nmap:
+Starting Nmap 7.99 ( https://nmap.org ) at 2026-08-15 23:43 +0100
+Nmap scan report for 192.168.100.20
+Host is up (0.00053s latency).
+
+PORT      STATE         SERVICE
+22222/udp open|filtered unknown
+MAC Address: 08:00:27:05:9D:9A (Oracle VirtualBox virtual NIC)
+
+Nmap done: 1 IP address (1 host up) scanned in 2.67 seconds
+
+mininmap:
+Port:  22222 State:  open
+

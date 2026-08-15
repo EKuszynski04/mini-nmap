@@ -1,9 +1,12 @@
 from dataclasses import dataclass
-from models import PortState
+from models.scan_type import ScanType
+import ipaddress
 
 # A class structure that stores the configuration data of the scans.
+
+@dataclass
 class ScanConfig:
-    ip: str
+    ip: str 
     ports: list[int]
     timeout: float
-    scan_type: str
+    scan_type: ScanType

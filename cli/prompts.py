@@ -15,11 +15,11 @@ def get_target_max_port():
     return input(PROMPT_TARGET_MAX_PORT)
 
 # Function user to prompt the user to enter the scan type tahts going to be used
-def get_scan_type():
+def get_prompt_scan_type():
     return input(PROMPT_SCAN_TYPE)
 
 # Function user to prompt the user to enter the timeout value for each port
-def get_timeout():
+def get_prompt_timeout():
     return input(PROMPT_TIMEOUT)
 
 # def get_scan_config():

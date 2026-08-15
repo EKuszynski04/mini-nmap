@@ -1,4 +1,3 @@
-import socket;
 from controller.controller import ScanController
 
 def main():

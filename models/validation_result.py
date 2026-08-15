@@ -1,5 +1,5 @@
 from dataclasses import dataclass
-from models import PortState
+from models.port_state import PortState
 
 # A class structure that stores the result of the validation functions.
 @dataclass

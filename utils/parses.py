@@ -15,15 +15,14 @@ def parse_scan_type(scan_type:str):
     except KeyError:
         raise ValueError(ERROR_SCANTYPE) from None
 
-
-# Function that returns a list of ports after parsing that can be used for a scan
+# Function that returns a list of ports after parsing that can be used for a scan - will raise a value error if input doesnt match data type
 def parse_ports(min_port,max_port):
     return int(min_port),int(max_port)
 
-# Function that returns a float timeout value
+# Function that returns a float timeout value - will raise a value error if input doesnt match data type
 def parse_timeout(timeout):
     return float(timeout)
     
-# Function that returns an ip address 
-def parse_ip_address(ip_address):
-    return ipaddress.ip_address(ip_address)
+# Function that returns an ip address - will raise a value error if input doesnt match data type
+def parse_ip_address(ip_address) :
+    return str(ipaddress.ip_address(ip_address))
