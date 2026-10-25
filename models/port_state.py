@@ -4,5 +4,8 @@ from enum import Enum
 class PortState(Enum):
     OPEN = "open"
     CLOSED = "closed"
+    OPEN_FILTERED = "open|filtered"
     TIMEOUT = "timeout"
     ERROR = "error"
+
+  

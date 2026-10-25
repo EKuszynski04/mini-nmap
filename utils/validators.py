@@ -53,7 +53,7 @@ def validate_ip_address(ip_addr:str):
 # Function to validate timeout times
 def validate_timeout(timeout:float):
     if timeout < MIN_TIMEOUT_LIMIT:
-            return ValidationResult(valid=False,reason=ERROR_MIN_TIMEOUT)
+        return ValidationResult(valid=False,reason=ERROR_MIN_TIMEOUT)
     if timeout > MAX_TIMEOUT_LIMIT:
         return ValidationResult(valid=False,reason=ERROR_MAX_TIMEOUT)
     if timeout > COMMON_TIMEOUT_LIMIT:

@@ -18,20 +18,7 @@ from models.scan_config import ScanConfig,ScanType
 from scanner.tcp_scanner import tcp_scan
 from scanner.udp_scanner import udp_scan
 
-
-# 1. controller
-# 2. prompts
-# 3. parsers
-# 4. validators
-
 class ScanController:
-
-    _instance = None
-
-    def __new__(cls):
-        if cls._instance is None:
-            cls._instance = super().__new__(cls)
-        return cls._instance
 
     def run(self):
 
@@ -47,7 +34,7 @@ class ScanController:
         self.display_results(results)
 
 
-    # Function used gather all the prompts for a scan.
+    # Gather all the prompts for a scan config.
     def get_scan_config(self):
         ip = self.get_scan_ip_address()
         ports = self.get_ports()
@@ -60,12 +47,14 @@ class ScanController:
             scan_type=scan_type,
             timeout=timeout)
 
+    # Run udp or tcp scans based on config.
     def run_scan(self, config):
         if config.scan_type == ScanType.TCP:
             return tcp_scan(config.ip,config.ports,config.timeout)
         else:
             return udp_scan(config.ip,config.ports,config.timeout)
-            
+
+    # Display scan results
     def display_results(self, results):
         for scan in results:
             print(
@@ -74,13 +63,13 @@ class ScanController:
             if scan.error_msg:
                 print(f"{GENERIC_ERRMSG_MSG} {scan.error_msg}")
 
-
+    # Display intro banner and network warning.
     def show_intro(self):
         print(INTRO_BANNER)
         print('\n\n')
         print(WARNING_USER_MSG)
 
-
+    # Get user inputted ip address and validate ip
     def get_scan_ip_address(self):
         while True:
             ip = get_target_ip()
@@ -88,8 +77,9 @@ class ScanController:
                 return parse_ip_address(ip)
             except ValueError:
                 print(ERROR_IP_INVALID)
+                continue
                 
-
+    # Retrieves both min and max ports from user inputs and validate
     def get_ports(self):
         while True:
             min_port = get_target_min_port()
@@ -107,7 +97,7 @@ class ScanController:
                 print(valid.warning)
             return list(range(min_port, max_port + 1))
 
-
+    # Function to rerieve scan type from user and parse
     def get_scan_type(self):
         while True:
             scantype = get_prompt_scan_type()
@@ -115,9 +105,10 @@ class ScanController:
                 return parse_scan_type(scantype)
             except ValueError:
                 print(ERROR_SCANTYPE)
+                continue
 
     
-
+    # Function to rerieve timeout value from user and validate
     def get_timeout(self):
          while True:
             timeout = get_prompt_timeout()

@@ -96,3 +96,63 @@ Nmap done: 1 IP address (1 host up) scanned in 2.67 seconds
 mininmap:
 Port:  22222 State:  open
 
+04/09/26
+
+# Testing Setup
+
+| Kali Linux | Scanner | 192.168.100.10 |
+| Ubuntu Server | Target | 192.168.100.20 | - UDP test server has been setup on port 9999
+
+# Overview 
+
+Retesting UDP scans after code rewrite.
+
+Test 1: A test designed to check if mininmap can detect open udp servers. UDP server setup on 192.168.100.20 using port 9999.
+
+nmap:
+Starting Nmap 7.99 ( https://nmap.org ) at 2026-09-04 22:15 +0100
+Nmap scan report for 192.168.100.20
+Host is up (0.00076s latency).
+
+PORT     STATE SERVICE
+9999/udp open  distinct
+MAC Address: 08:00:27:05:9D:9A (Oracle VirtualBox virtual NIC)
+
+Nmap done: 1 IP address (1 host up) scanned in 2.24 seconds
+
+mininmap: 
+Port:  9999 State:  open
+
+Test 2: A test desigend to check how mininmap reacts to ports with no UDP service.
+
+nmap:
+Starting Nmap 7.99 ( https://nmap.org ) at 2026-09-04 23:51 +0100
+Nmap scan report for 192.168.100.20
+Host is up (0.00063s latency).
+
+PORT     STATE         SERVICE
+9998/udp open|filtered distinct32
+MAC Address: 08:00:27:05:9D:9A (Oracle VirtualBox virtual NIC)
+
+Nmap done: 1 IP address (1 host up) scanned in 2.39 seconds
+
+mininmap:
+Port:  9998 State:  timeout
+Error Message:  Connection Timed Out
+
+Test 3: A test desigend to check how mininmap reacts to ports with UDP service that are closed.
+
+nmap:
+Starting Nmap 7.99 ( https://nmap.org ) at 2026-09-05 00:23 +0100
+Nmap scan report for 192.168.100.20
+Host is up (0.00093s latency).
+
+PORT     STATE  SERVICE
+9997/udp closed palace-6
+MAC Address: 08:00:27:05:9D:9A (Oracle VirtualBox virtual NIC)
+
+Nmap done: 1 IP address (1 host up) scanned in 2.30 seconds
+
+mininmap:
+Port:  9997 State:  closed
+

@@ -10,19 +10,24 @@ from utils.constants import (ERROR_TIMEOUT_TEXT)
 # Tries to establish a connection with each port specififed in the list and 
 # returns a list of ScanResult objects based on results
 def udp_scan(ip: str, ports: list[int], timeout: float):
-    with socket.socket(socket.AF_INET, socket.SOCK_DGRAM) as s:
-        ports_scanned = []
-        for port in ports:
-            try:   
-                result = s.connect_ex((ip,port))
-                # if connection is succeffull port is open
-                if result == 0:
-                    ports_scanned.append(ScanResult(port=port,state=PortState.OPEN))
-                else:
-                    ports_scanned.append(ScanResult(port=port,state=PortState.CLOSED,error_msg=os.strerror(result)))
+    ports_scanned = []
+    for port in ports:
+
+        with socket.socket(socket.AF_INET, socket.SOCK_DGRAM) as s:
+            s.settimeout(timeout)
+            
+            try:
+                s.connect((ip,port))
+                s.sendto(b"MININMAP", (ip,port))
+
+                data,address = s.recvfrom(1024)
+
+                ports_scanned.append(ScanResult(port=port,state=PortState.OPEN))
+            except ConnectionRefusedError:
+                ports_scanned.append(ScanResult(port=port,state=PortState.CLOSED))
             except socket.timeout:
                 ports_scanned.append(ScanResult(port=port,state=PortState.TIMEOUT,error_msg=ERROR_TIMEOUT_TEXT))
-            # Subclass of OSErrors resolving hostname specific (for future hostname scans)
+            # Subclass of OSErrors resolving hostname specific (for future hostname scans implementation)
             except socket.gaierror as err:
                 ports_scanned.append(ScanResult(port=port,state=PortState.ERROR,error_msg=str(err)))
             # Operating System related Errors
