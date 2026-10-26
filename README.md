@@ -24,13 +24,15 @@ For more in depth documentation read the Mini Nmap Documentation file.
 
 Mini Nmap follows a layered structure:
 
-| Layer | Responsibility |
-|---|---|
-| `cli/` | Input prompts and output formatting |
-| `utils/` | Parsers and validators for user input |
-| `models/` | Dataclasses for scan results and configuration |
-| `scanner/` | `tcp_scan` and `udp_scan` socket-level scanning logic |
+| Layer         | Responsibility                                             |
+| ------------- | ---------------------------------------------------------- |
+| `cli/`        | Input prompts and output formatting                        |
+| `utils/`      | Parsers and validators for user input                      |
+| `models/`     | Dataclasses for scan results and configuration             |
+| `scanner/`    | `tcp_scan` and `udp_scan` socket-level scanning logic      |
 | `controller/` | Orchestrates the flow between CLI, validation and scanners |
+
+![Architecture](docs/screenshots/architecuture_diagram.png)
 
 The separation lets the scanner modules be tested in isolation from the CLI, and the validators be tested without touching the network.
 
