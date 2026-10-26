@@ -1,11 +1,6 @@
 # Enviroments
 env/
 
-# Reports
-results/*.json
-results/*.txt
-results/*.csv
-
 # Python bytecode
 __pycache__/
 *.py[cod]

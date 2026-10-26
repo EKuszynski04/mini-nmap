@@ -1,0 +1,14 @@
+# Nmap 7.99 scan initiated Sat Aug 15 10:25:18 2026 as: /usr/lib/nmap/nmap --privileged -sT -oN results/nmap_tcp_baseline.txt 192.168.100.20
+Nmap scan report for 192.168.100.20
+Host is up (0.0012s latency).
+Not shown: 994 closed tcp ports (conn-refused)
+PORT    STATE SERVICE
+21/tcp  open  ftp
+22/tcp  open  ssh
+53/tcp  open  domain
+80/tcp  open  http
+139/tcp open  netbios-ssn
+445/tcp open  microsoft-ds
+MAC Address: 08:00:27:05:9D:9A (Oracle VirtualBox virtual NIC)
+
+# Nmap done at Sat Aug 15 10:25:23 2026 -- 1 IP address (1 host up) scanned in 4.71 seconds 
