@@ -2,7 +2,7 @@
 
 A Python-based port scanner built to explore TCP/IP networking and Python socket programming. Mini Nmap replicates basic Nmap functionality TCP and UDP port scanning with custom port ranges using only the Python standard library.
 
-For more in depth documentation read the Mini Nmap Documentation file.
+[read the Mini Nmap Documentation file](docs/Mini%20Nmap%20Documentation.pdf)
 
 **Authorised use only.** This tool is intended for educational purposes and authorised network testing. Only scan systems you have explicit permission to test. 
 
@@ -18,7 +18,7 @@ For more in depth documentation read the Mini Nmap Documentation file.
 
 **Not included:** vulnerability scanning, scripting, stealth/evasion, packet crafting, OS fingerprinting, service identification, host reachability checks.
 
----
+---s
 
 ## How it works
 
