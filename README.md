@@ -18,7 +18,7 @@ A Python-based port scanner built to explore TCP/IP networking and Python socket
 
 **Not included:** vulnerability scanning, scripting, stealth/evasion, packet crafting, OS fingerprinting, service identification, host reachability checks.
 
----s
+---
 
 ## How it works
 
